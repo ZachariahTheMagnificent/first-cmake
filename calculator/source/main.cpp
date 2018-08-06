@@ -63,6 +63,10 @@ divide [value1] [values2]...: Divides value1 by value2. Then, it divides that by
 
 )";
 			}
+			else if(strcmp(command_string, "quick-maths") == 0)
+			{
+				cout << "420 Blaze it!\n";
+			}
 			else
 			{
 				try
