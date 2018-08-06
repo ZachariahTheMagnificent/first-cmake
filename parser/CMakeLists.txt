@@ -3,7 +3,7 @@ project(parser VERSION 1.0.0 DESCRIPTION "A simple parser library" LANGUAGES CXX
 
 # Declare the library.
 add_library(parser)
-# This library and anyone that uses it will have C++17.
+# Declare that the library uses C++17
 target_compile_features(parser PUBLIC cxx_std_17)
 # Declare our includes.
 target_include_directories(parser

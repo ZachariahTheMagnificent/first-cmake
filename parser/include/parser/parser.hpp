@@ -3,15 +3,20 @@
 #include <string>
 #include <vector>
 
-namespace zachariahs_world {
-	namespace parser {
-		using input = std::variant<std::string, float>;
+namespace zachariahs_world
+{
+	namespace parser
+	{
+		using number = long double;
+		using input = std::variant<std::string, number>;
 
-		struct parsed_command {
+		struct parsed_command
+		{
 			parsed_command() = default;
 			parsed_command(std::string name, std::vector<input> inputs) :
 				name {std::move(name)},
-				inputs {std::move(inputs)} {}
+				inputs {std::move(inputs)}
+			{}
 
 			std::string name;
 			std::vector<input> inputs;
