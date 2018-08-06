@@ -1,0 +1,1 @@
+Open the CMakeList.txt file in this main folder to use CMake with Visual Studio!
