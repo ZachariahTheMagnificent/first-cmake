@@ -3,6 +3,11 @@
 
 namespace zachariahs_world::parser
 {
+	parsed_command::parsed_command(string name, vector<input> inputs) :
+		name {std::move(name)},
+		inputs {std::move(inputs)}
+	{}
+
 	parsed_command parse(const string& input_string)
 	{
 		auto return_value = parsed_command {};

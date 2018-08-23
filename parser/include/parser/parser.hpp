@@ -22,10 +22,7 @@ namespace zachariahs_world::parser
 	struct parsed_command
 	{
 		parsed_command() = default;
-		parsed_command(string name, vector<input> inputs) :
-			name {std::move(name)},
-			inputs {std::move(inputs)}
-		{}
+		parsed_command(string name, vector<input> inputs);
 
 		string name;
 		vector<input> inputs;
