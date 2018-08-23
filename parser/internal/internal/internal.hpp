@@ -3,6 +3,6 @@
 
 namespace zachariahs_world::parser
 {
-	std::vector<std::string> tokenize(const std::string& input_string);
-	input parse_input(const std::string& input_string);
+	vector<string> tokenize(const string& input_string);
+	input parse_input(const string& input_string);
 }

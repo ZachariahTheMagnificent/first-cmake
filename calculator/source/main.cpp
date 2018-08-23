@@ -1,13 +1,22 @@
 #include <iostream>
 #include <command-line-calculator.hpp>
 
+using zachariahs_world::simple_calculator::command_line_calculator;
+using std::cout;
+using std::cin;
+using std::exception;
+using std::size_t;
+using std::system;
+using std::strcmp;
+using std::strlen;
+
+constexpr size_t operator ""_size(const unsigned long long value) noexcept
+{
+	return static_cast<size_t>(value);
+}
+
 int main()
 {
-	using zachariahs_world::simple_calculator::command_line_calculator;
-	using std::cout;
-	using std::cin;
-	using std::exception;
-
 	try
 	{
 		auto calculator = command_line_calculator {};
@@ -17,17 +26,17 @@ int main()
 		while(true)
 		{
 			cout << "Enter a command(\"help\" for help or empty line to exit): ";
-			const auto max_string_size = std::size_t {} +1000;
+			const auto max_string_size = 1000_size;
 			char command_string[max_string_size];
-			std::cin.getline(command_string, max_string_size);
+			cin.getline(command_string, max_string_size);
 
-			if(std::strlen(command_string) == 0)
+			if(strlen(command_string) == 0)
 			{
 				break;
 			}
-			else if(std::strcmp(command_string, "help") == 0)
+			else if(strcmp(command_string, "help") == 0)
 			{
-				std::cout << R"(
+				cout << R"(
 ****************************************
 HELP
 ****************************************
@@ -81,7 +90,7 @@ divide [value1] [values2]...: Divides value1 by value2. Then, it divides that by
 			}
 		}
 	}
-	catch(const std::exception& application_exception)
+	catch(const exception& application_exception)
 	{
 		cout << "Error: " << application_exception.what() << '\n';
 	}
@@ -90,6 +99,6 @@ divide [value1] [values2]...: Divides value1 by value2. Then, it divides that by
 		cout << "Error: An error occured :shrug:\n";
 	}
 
-	std::system("pause");
+	system("pause");
 	return EXIT_SUCCESS;
 }

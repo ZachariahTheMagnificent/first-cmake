@@ -54,7 +54,9 @@ namespace zachariahs_world::math
 
 	constexpr float sqrt(const float x) noexcept
 	{
-		if(x > -std::numeric_limits<float>::infinity() && x < std::numeric_limits<float>::infinity())
+		using std::numeric_limits;
+
+		if(x > -numeric_limits<float>::infinity() && x < numeric_limits<float>::infinity())
 		{
 			if(x > 0)
 			{
@@ -67,7 +69,7 @@ namespace zachariahs_world::math
 		}
 		else
 		{
-			return std::numeric_limits<float>::quiet_NaN();
+			return numeric_limits<float>::quiet_NaN();
 		}
 	}
 	//constexpr float sqrt(const float num) {

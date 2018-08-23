@@ -3,7 +3,7 @@
 
 namespace zachariahs_world::parser
 {
-	parsed_command parse(const std::string& input_string)
+	parsed_command parse(const string& input_string)
 	{
 		auto return_value = parsed_command {};
 
@@ -11,12 +11,12 @@ namespace zachariahs_world::parser
 
 		if(tokens.empty())
 		{
-			throw std::invalid_argument {"Input string contains no parsable tokens!"};
+			throw invalid_argument {"Input string contains no parsable tokens!"};
 		}
 
 		return_value.name = tokens[0];
 
-		for(auto index = std::size_t {} +1, size = tokens.size(); index < size; ++index)
+		for(auto index = 1_size, size = tokens.size(); index < size; ++index)
 		{
 			return_value.inputs.push_back(parse_input(tokens[index]));
 		}

@@ -2,24 +2,20 @@
 
 namespace zachariahs_world::simple_calculator
 {
-	command_line_calculator::string command_line_calculator::previous_variable = string {"previous"};
+	string command_line_calculator::previous_variable = string {"previous"};
 
-	command_line_calculator::number command_line_calculator::run(const string & command_string)
+	number command_line_calculator::run(const string& command_string)
 	{
-		using parser::parse;
-		using std::get;
-		using std::invalid_argument;
-
 		auto parsed_command = parse(command_string);
 
 		if(parsed_command.name == "abs")
 		{
+			using math::abs;
+
 			if(parsed_command.inputs.size() != 1)
 			{
-				throw std::invalid_argument {"abs only accepts 1 argument!"};
+				throw invalid_argument {"abs only accepts 1 argument!"};
 			}
-
-			using math::abs;
 
 			const auto value = get_number(parsed_command.inputs[0]);
 			const auto result = abs(value);
@@ -30,12 +26,12 @@ namespace zachariahs_world::simple_calculator
 		}
 		else if(parsed_command.name == "floor")
 		{
+			using math::floor;
+
 			if(parsed_command.inputs.size() != 1)
 			{
-				throw std::invalid_argument {"floor only accepts 1 argument!"};
+				throw invalid_argument {"floor only accepts 1 argument!"};
 			}
-
-			using math::floor;
 
 			const auto value = get_number(parsed_command.inputs[0]);
 			const auto result = floor(value);
@@ -46,12 +42,12 @@ namespace zachariahs_world::simple_calculator
 		}
 		else if(parsed_command.name == "ceil")
 		{
+			using math::ceil;
+
 			if(parsed_command.inputs.size() != 1)
 			{
-				throw std::invalid_argument {"ciel only accepts 1 argument!"};
+				throw invalid_argument {"ciel only accepts 1 argument!"};
 			}
-
-			using math::ceil;
 
 			const auto value = get_number(parsed_command.inputs[0]);
 			const auto result = ceil(value);
@@ -62,12 +58,12 @@ namespace zachariahs_world::simple_calculator
 		}
 		else if(parsed_command.name == "clamp")
 		{
+			using math::clamp;
+
 			if(parsed_command.inputs.size() != 3)
 			{
-				throw std::invalid_argument {"clamp only accepts 3 arguments!"};
+				throw invalid_argument {"clamp only accepts 3 arguments!"};
 			}
-
-			using math::clamp;
 
 			const auto value = get_number(parsed_command.inputs[0]);
 			const auto min = get_number(parsed_command.inputs[1]);
@@ -80,12 +76,12 @@ namespace zachariahs_world::simple_calculator
 		}
 		else if(parsed_command.name == "wrap")
 		{
+			using math::wrap;
+
 			if(parsed_command.inputs.size() != 3)
 			{
-				throw std::invalid_argument {"wrap only accepts 3 arguments!"};
+				throw invalid_argument {"wrap only accepts 3 arguments!"};
 			}
-
-			using math::wrap;
 
 			const auto value = get_number(parsed_command.inputs[0]);
 			const auto min = get_number(parsed_command.inputs[1]);
@@ -98,12 +94,12 @@ namespace zachariahs_world::simple_calculator
 		}
 		else if(parsed_command.name == "degrees-to-radians")
 		{
+			using math::degrees_to_radians;
+
 			if(parsed_command.inputs.size() != 1)
 			{
-				throw std::invalid_argument {"degrees-to-radians only accepts 1 argument!"};
+				throw invalid_argument {"degrees-to-radians only accepts 1 argument!"};
 			}
-
-			using math::degrees_to_radians;
 
 			const auto value = get_number(parsed_command.inputs[0]);
 			const auto result = degrees_to_radians(value);
@@ -114,11 +110,12 @@ namespace zachariahs_world::simple_calculator
 		}
 		else if(parsed_command.name == "radians-to-degrees")
 		{
+			using math::radians_to_degrees;
+
 			if(parsed_command.inputs.size() != 1)
 			{
-				throw std::invalid_argument {"radians-to-degrees only accepts 1 argument!"};
+				throw invalid_argument {"radians-to-degrees only accepts 1 argument!"};
 			}
-			using math::radians_to_degrees;
 
 			const auto value = get_number(parsed_command.inputs[0]);
 			const auto result = radians_to_degrees(value);
@@ -129,11 +126,12 @@ namespace zachariahs_world::simple_calculator
 		}
 		else if(parsed_command.name == "sqrt")
 		{
+			using math::sqrt;
+
 			if(parsed_command.inputs.size() != 1)
 			{
-				throw std::invalid_argument {"sqrt only accepts 1 argument!"};
+				throw invalid_argument {"sqrt only accepts 1 argument!"};
 			}
-			using math::sqrt;
 
 			const auto value = get_number(parsed_command.inputs[0]);
 			const auto result = sqrt(value);
@@ -146,7 +144,7 @@ namespace zachariahs_world::simple_calculator
 		{
 			if(parsed_command.inputs.size() < 2)
 			{
-				throw std::invalid_argument {"plus needs at least 2 arguments!"};
+				throw invalid_argument {"plus needs at least 2 arguments!"};
 			}
 
 			auto result = number {};
@@ -164,12 +162,12 @@ namespace zachariahs_world::simple_calculator
 		{
 			if(parsed_command.inputs.size() < 2)
 			{
-				throw std::invalid_argument {"minus needs at least 2 arguments!"};
+				throw invalid_argument {"minus needs at least 2 arguments!"};
 			}
 
 			auto result = get_number(parsed_command.inputs[0]);
 
-			for(auto index = std::size_t {} +1, size = parsed_command.inputs.size(); index < size; ++index)
+			for(auto index = 1_size, size = parsed_command.inputs.size(); index < size; ++index)
 			{
 				result -= get_number(parsed_command.inputs[index]);
 			}
@@ -182,7 +180,7 @@ namespace zachariahs_world::simple_calculator
 		{
 			if(parsed_command.inputs.size() < 2)
 			{
-				throw std::invalid_argument {"multiply needs at least 2 arguments!"};
+				throw invalid_argument {"multiply needs at least 2 arguments!"};
 			}
 
 			auto result = number {} + 1;
@@ -200,12 +198,12 @@ namespace zachariahs_world::simple_calculator
 		{
 			if(parsed_command.inputs.size() < 2)
 			{
-				throw std::invalid_argument {"divide needs at least 2 arguments!"};
+				throw invalid_argument {"divide needs at least 2 arguments!"};
 			}
 
 			auto result = get_number(parsed_command.inputs[0]);
 
-			for(auto index = std::size_t {} +1, size = parsed_command.inputs.size(); index < size; ++index)
+			for(auto index = 1_size, size = parsed_command.inputs.size(); index < size; ++index)
 			{
 				result /= get_number(parsed_command.inputs[index]);
 			}
@@ -218,7 +216,7 @@ namespace zachariahs_world::simple_calculator
 		{
 			if(parsed_command.inputs.size() > 1)
 			{
-				throw std::invalid_argument {"store only accepts 1 string!"};
+				throw invalid_argument {"store only accepts 1 string!"};
 			}
 			try
 			{
@@ -228,23 +226,23 @@ namespace zachariahs_world::simple_calculator
 			}
 			catch(...)
 			{
-				throw std::invalid_argument {"store only accepts a string!"};
+				throw invalid_argument {"store only accepts a string!"};
 			}
 		}
 		else if(parsed_command.name == "print")
 		{
 			if(parsed_command.inputs.size() > 1)
 			{
-				throw std::invalid_argument {"print only accepts 1 string!"};
+				throw invalid_argument {"print only accepts 1 string!"};
 			}
 			try
 			{
 				auto string_input = get<string>(parsed_command.inputs[0]);
 				return get_variable(string_input);
 			}
-			catch(const std::bad_variant_access&)
+			catch(const bad_variant_access&)
 			{
-				throw std::invalid_argument {"print only accepts a string!"};
+				throw invalid_argument {"print only accepts a string!"};
 			}
 			catch(...)
 			{
@@ -255,21 +253,18 @@ namespace zachariahs_world::simple_calculator
 		throw invalid_argument {"Invalid command!"};
 	}
 
-	command_line_calculator::number command_line_calculator::get_variable(const string& variable_name) const
+	number command_line_calculator::get_variable(const string& variable_name) const
 	{
 		auto it = variables_.find(variable_name);
 		if(it == variables_.end())
 		{
-			throw std::invalid_argument {"That variable doesn't exist!"};
+			throw invalid_argument {"That variable doesn't exist!"};
 		}
 		return it->second;
 	}
 
-	command_line_calculator::number command_line_calculator::get_number(const parsed_input& number_input) const
+	number command_line_calculator::get_number(const parsed_input& number_input) const
 	{
-		using std::get;
-		using std::get_if;
-
 		if(auto num = get_if<number>(&number_input); num != nullptr)
 		{
 			return *num;

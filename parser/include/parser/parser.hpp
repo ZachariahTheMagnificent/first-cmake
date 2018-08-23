@@ -6,19 +6,30 @@
 namespace zachariahs_world::parser
 {
 	using number = long double;
-	using input = std::variant<std::string, number>;
+	using std::string;
+	using std::vector;
+	using std::size_t;
+	using std::invalid_argument;
+	using std::bad_variant_access;
+	using std::get;
+	using std::get_if;
+	using input = std::variant<string, number>;
 
+	constexpr size_t operator ""_size(const unsigned long long value) noexcept
+	{
+		return static_cast<size_t>(value);
+	}
 	struct parsed_command
 	{
 		parsed_command() = default;
-		parsed_command(std::string name, std::vector<input> inputs) :
+		parsed_command(string name, vector<input> inputs) :
 			name {std::move(name)},
 			inputs {std::move(inputs)}
 		{}
 
-		std::string name;
-		std::vector<input> inputs;
+		string name;
+		vector<input> inputs;
 	};
 
-	parsed_command parse(const std::string& input_string);
+	parsed_command parse(const string& input_string);
 }

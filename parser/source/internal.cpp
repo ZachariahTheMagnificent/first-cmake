@@ -2,9 +2,9 @@
 
 namespace zachariahs_world::parser
 {
-	std::vector<std::string> tokenize(const std::string& input_string)
+	vector<string> tokenize(const string& input_string)
 	{
-		std::vector<std::string> tokens;
+		vector<string> tokens;
 
 		for(auto begin = input_string.find_first_not_of(' ', 0); begin != input_string.npos; begin = input_string.find_first_not_of(' ', begin + 1))
 		{
@@ -24,11 +24,13 @@ namespace zachariahs_world::parser
 
 		return tokens;
 	}
-	input parse_input(const std::string& input_string)
+	input parse_input(const string& input_string)
 	{
+		using std::stold;
+
 		try
 		{
-			return input {std::stold(input_string)};
+			return input {stold(input_string)};
 		}
 		catch(...)
 		{
