@@ -3,7 +3,7 @@
 
 int main()
 {
-	using zachariahs_world::command_line_calculator;
+	using zachariahs_world::simple_calculator::command_line_calculator;
 	using std::cout;
 	using std::cin;
 	using std::exception;

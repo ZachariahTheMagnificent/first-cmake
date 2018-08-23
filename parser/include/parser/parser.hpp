@@ -3,25 +3,22 @@
 #include <string>
 #include <vector>
 
-namespace zachariahs_world
+namespace zachariahs_world::parser
 {
-	namespace parser
+	using number = long double;
+	using input = std::variant<std::string, number>;
+
+	struct parsed_command
 	{
-		using number = long double;
-		using input = std::variant<std::string, number>;
+		parsed_command() = default;
+		parsed_command(std::string name, std::vector<input> inputs) :
+			name {std::move(name)},
+			inputs {std::move(inputs)}
+		{}
 
-		struct parsed_command
-		{
-			parsed_command() = default;
-			parsed_command(std::string name, std::vector<input> inputs) :
-				name {std::move(name)},
-				inputs {std::move(inputs)}
-			{}
+		std::string name;
+		std::vector<input> inputs;
+	};
 
-			std::string name;
-			std::vector<input> inputs;
-		};
-
-		parsed_command parse(const std::string& input_string);
-	}
+	parsed_command parse(const std::string& input_string);
 }

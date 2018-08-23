@@ -1,6 +1,6 @@
 #include <command-line-calculator.hpp>
 
-namespace zachariahs_world
+namespace zachariahs_world::simple_calculator
 {
 	command_line_calculator::string command_line_calculator::previous_variable = string {"previous"};
 

@@ -4,7 +4,7 @@
 #include <unordered_map>
 #include <string>
 
-namespace zachariahs_world
+namespace zachariahs_world::simple_calculator
 {
 	class command_line_calculator
 	{
