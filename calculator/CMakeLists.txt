@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.11)
-project(calculator VERSION 1.0.0 DESCRIPTION "A very calculator application" LANGUAGES CXX)
+project(calculator VERSION 1.0.0 DESCRIPTION "A simple calculator application" LANGUAGES CXX)
 
 # Declare the executable.
 add_executable(calculator)
