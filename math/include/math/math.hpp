@@ -72,14 +72,4 @@ namespace zachariahs_world::math
 			return numeric_limits<float>::quiet_NaN();
 		}
 	}
-	//constexpr float sqrt(const float num) {
-	//	auto next_approximation = [](const float squared_num, const float current_approximation) {
-	//		return (current_approximation + squared_num / current_approximation) / 2;
-	//	};
-	//	auto current_approximation = 1.f;
-
-	//	for(float squared_num = num; approximately_equal(squared_num/current_approximation, current_approximation); current_approximation = next_approximation(squared_num, current_approximation)) {}
-
-	//	return current_approximation;
-	//}
 }
