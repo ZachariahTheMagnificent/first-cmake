@@ -6,9 +6,11 @@ What's CMake? CMake is a build system designed to build C++ projects.
 
 What's a build system? Well, you know how a C++ compiler creates an application from source(.cpp) files? Those source files also `#include` header files too. Question is, how does the compiler find those files in the first place? In fact, how does the compiler know to build the application using settings like "build in debug mode" or "Use this library"? Visual Studio users don't think about it too much as Visual Studio takes care of that for you. Underneath the hood, Visual Studio uses a tool called MSBuild that configures the compiler for you to build your application.
 
-Back before build systems were used, programmers would interface with the compiler directly, running commands like
+Back before build systems were used, programmers would interface with the compiler directly, running commands like:
 
-`compiler build-app "app.exe" -debug_mode -header_files "header.hpp" -source_files "main.cpp"`.
+```
+compiler build-app "app.exe" -debug_mode -header_files "header.hpp" -source_files "main.cpp"
+```
 
 This obviously doesn't scale well once you start using multiple files and libraries with tons of settings so programmers use tools like build systems to automate the build process for them.
 
