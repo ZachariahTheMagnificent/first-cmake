@@ -4,9 +4,9 @@ __Open this folder in Visual Studio to start using CMake!__
 
 What's CMake? CMake is a build system designed to build C++ projects.
 
-What's a build system? Well, you know how a C++ compiler creates an application from source(.cpp) files? Those source files also `#include` header files too. Question is, how does the compiler find those files in the first place? In fact, how does the compiler know to build the application using settings like "build in debug mode" or "Use this library"? Visual Studio users don't think about it too much as Visual Studio takes care of that for you. Underneath the hood, Visual Studio uses a tool called MSBuild that configures the compiler for you to build your application.
+What's a build system? Well, you know how a C++ compiler creates an application from source(.cpp) files? Those source files also `#include` header files too. Question is, how does the compiler find those files in the first place? In fact, how does the compiler know to build the application using settings like "build in debug mode" or "Use this library"? Visual Studio users don't think about it too much as Visual Studio takes care of that for you. Underneath the hood, Visual Studio uses a tool called MSBuild that configures the compiler to build your application.
 
-Back before build systems were used, programmers would interface with the compiler directly, running commands like:
+Before build systems were used, programmers would interface with the compiler directly by running commands like:
 
 ```
 compiler build-app "app.exe" -debug_mode -header_files "header.hpp" -source_files "main.cpp"
@@ -16,7 +16,7 @@ This obviously doesn't scale well once you start using multiple files and librar
 
 Unlike Visual Studio, CMake is more universal as it could work with multiple compilers and editors from Windows to even Linux. Plus, a lot of libraries use it meaning that if your project uses CMake, it can more easily intergrate those libraries.
 
-CMake works with CMake projects defined by a CMakeLists.txt. These projects contain "targets" that can then be "linked" together to build a library, an application or even multiple of them at once! There are various commands you can put in a CMakeLists.txt but the ones in this project contain all the commands you need for most projects.
+CMake works with CMake projects defined by a CMakeLists.txt. These projects contain "targets" that can then be "linked" together to build a library, an application or an "interface library"(a target that builds no library, no application and is just a raw collection of settings to use). There are various commands you can put in a CMakeLists.txt but the ones in this project contain all the commands you need for most projects.
 
 Let's start with the main CMakeLists.txt in the main directory.
 
@@ -43,9 +43,9 @@ This is a comment. It starts with a # and follows it up with some text. CMake ju
 add_subdirectory("${PROJECT_SOURCE_DIR}/math")
 ```
 
-This command tells CMake to add another CMake project to the build. `${PROJECT_SOURCE_DIR}` simply specifies the directory the current CMake project is in.
+This command tells CMake to include another CMake project to the build. `${PROJECT_SOURCE_DIR}` simply specifies the directory the current CMake project is in.
 
-This is a common pattern where you have one main CMake project build all the other CMake projects. Other than that, the main CMake project doesn't do much.
+This is a common pattern where you have one main CMake project include all the other CMake projects. Other than that, the main CMake project doesn't have much else.
 
 Let's take a look at the parser project. This project has a library called parser.
 
@@ -92,13 +92,18 @@ target_sources(parser
 This lists all the files that the target has including source files and headers.
 
 
-Now let's look at the math project. This project has a header only library. Since the library is header only(no source files), it needs to be set slightly differently from regular libraries.
+Now let's look at the math project. This project has a header only library. Since the library is header only(no source files), it needs to be declared slightly differently from regular libraries.
 
 ```cmake
 # The library is a header only library. It won't be compiled.
 add_library(math INTERFACE)
 ```
-As you can see, the math library target is defined the same as the parser target but it has the `INTERFACE` keyword indicating that it is "empty". Header files don't get compiled by the compiler. They're just `#include`d into source files which are then compiled into an application. If you try to compile an application or library with no source files, the compiler will complain. `INTERFACE` library targets will not be compiled preventing this problem entirely. The rest of the file is similar to the parser project but with the `INTERFACE` keyword.
+
+As you can see, the math library target is defined the same as the parser target but it has the `INTERFACE` keyword indicating that it is an interface library. Interface libraries don't build anything. They're just a collection of settings that other targets can inherit.
+
+Header only libraries have to be interface libraries because header files don't actually get compiled by the compiler. They're just `#include`d into source files which are then compiled into an application. If you try to compile an application or library with no source files, the compiler will complain. As an interface library, other targets can link to it to inherit its headers.
+
+The rest of the file is similar to the parser project but with the `INTERFACE` keyword.
 
 ```cmake
 # Declare that the library uses C++17.
@@ -133,7 +138,7 @@ target_link_libraries(calculator
 
 This links the targets math and parser to calculator. This command is one of the most useful commands you'd use in CMake. Targets are basically just a collection of settings. Where your headers are located, what files your project has, which version of C++ it uses etc. You can store these settings into small individual targets and then link them together into a large target. With the keywords `PUBLIC`, `PRIVATE` and `INTERFACE`, you can control which settings will be inherited by other targets. This allows you to reuse settings by linking to specific targets saving you from having to set them up again. It's a bit like how C++ uses inheritance for code reuse.
 
-That's pretty much it. This is all you need to create CMake projects and use other CMake projects people make. CMake is incredibly simple to use when used right and with additional commands, you can do incredible things like building different applications for different platforms(Windows, Linux, Android) with one project or automate thousands of tests that debug your application the moment you build it. CMake gives you much more flexibility than what the Visual Studio interface allows.
+That's pretty much it. This is all you need to create CMake projects and use other CMake projects people make. CMake is incredibly simple to use when used right and with additional commands, you can do incredible things like building different applications for different platforms(Windows, Linux, Android) with one project or automate thousands of tests that debug your application the moment you build it. CMake gives you much more flexibility than what the Visual Studio settings allow.
 
 To learn more about CMake, check out the documentation here:
 https://cmake.org/cmake/help/latest/guide/tutorial/index.html
