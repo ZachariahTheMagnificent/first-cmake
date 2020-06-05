@@ -26,7 +26,7 @@ int main()
 		while(true)
 		{
 			cout << "Enter a command(\"help\" for help or empty line to exit): ";
-			const auto max_string_size = 1000_size;
+			constexpr auto max_string_size = 1000_size;
 			char command_string[max_string_size];
 			cin.getline(command_string, max_string_size);
 
@@ -99,6 +99,5 @@ divide [value1] [values2]...: Divides value1 by value2. Then, it divides that by
 		cout << "Error: An error occured :shrug:\n";
 	}
 
-	system("pause");
 	return EXIT_SUCCESS;
 }

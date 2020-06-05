@@ -2,6 +2,7 @@
 #include <variant>
 #include <string>
 #include <vector>
+#include <stdexcept>
 
 namespace zachariahs_world::parser
 {
