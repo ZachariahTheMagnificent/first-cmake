@@ -1,4 +1,6 @@
-Open this folder in Visual Studio to start using CMake!
+# My First CMake!
+
+__Open this folder in Visual Studio to start using CMake!__
 
 What's CMake? CMake is a build system designed to build C++ projects.
 
@@ -72,7 +74,7 @@ target_include_directories(parser
 
 This declares the directories where parser's header files are located in. Notice the keyword `PRIVATE`. Unlike `PUBLIC`, `PRIVATE` settings will not be inherited by other targets that link to parser. This is good for settings that are only used internally by the target and you don't want other targets to get them.
 
-```cpp
+```cmake
 # Declare the library's files.
 target_sources(parser
 	PUBLIC
