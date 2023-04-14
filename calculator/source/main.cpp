@@ -26,7 +26,7 @@ int main()
 		while(true)
 		{
 			cout << "Enter a command(\"help\" for help or empty line to exit): ";
-			const auto max_string_size = 1000_size;
+			constexpr auto max_string_size = 1000_size;
 			char command_string[max_string_size];
 			cin.getline(command_string, max_string_size);
 

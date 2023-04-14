@@ -6,6 +6,6 @@ add_library(math INTERFACE)
 # Declare that the library uses C++17.
 target_compile_features(math INTERFACE cxx_std_17)
 # Declare the library's includes.
-target_include_directories(math INTERFACE "${CMAKE_CURRENT_SOURCE_DIR}/include")
+target_include_directories(math INTERFACE "${PROJECT_SOURCE_DIR}/include")
 # Declare the library's files.
-target_sources(math INTERFACE "${CMAKE_CURRENT_SOURCE_DIR}/include/math/math.hpp")
+target_sources(math INTERFACE "${PROJECT_SOURCE_DIR}/include/math/math.hpp")
