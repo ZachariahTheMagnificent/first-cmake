@@ -99,6 +99,5 @@ divide [value1] [values2]...: Divides value1 by value2. Then, it divides that by
 		cout << "Error: An error occured :shrug:\n";
 	}
 
-	system("pause");
 	return EXIT_SUCCESS;
 }
