@@ -1,11 +1,12 @@
 #pragma once
 #include <limits>
+#include <cstring>
 
 namespace zachariahs_world::math
 {
-	const float full_circle_in_degrees = 360.f;
-	const float full_circle_in_radians = 6.283185307179586f;
-	const float epsilon = 0.00001f;
+	constexpr float full_circle_in_degrees = 360.f;
+	constexpr float full_circle_in_radians = 6.283185307179586f;
+	constexpr float epsilon = 0.00001f;
 
 	constexpr float abs(const float num) noexcept
 	{
